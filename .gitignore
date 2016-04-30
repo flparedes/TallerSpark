@@ -52,3 +52,4 @@ target
 .recommenders
 
 # Local DB
+mydb.db*
