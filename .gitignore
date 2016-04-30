@@ -50,3 +50,6 @@ target
 .settings
 .metadata
 .recommenders
+
+# Local DB
+mybd.db*
