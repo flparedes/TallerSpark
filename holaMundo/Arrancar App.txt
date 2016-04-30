@@ -1,0 +1,5 @@
+Crear aplicación
+mvn archetype:generate -DgroupId=es.franl2p -DartifactId=holaMundo -DarchetypeArtifactId=maven-archetype-quickstart
+
+Arrancar aplicacion con Maven
+mvn compile exec:java
