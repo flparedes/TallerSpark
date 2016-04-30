@@ -14,6 +14,6 @@
          
         <property name="hibernate.hbm2ddl.auto">update</property>
          
-        <mapping class="es.franl2p.model.Book"/>
+        <mapping class="es.franl2p.model.Car"/>
     </session-factory>
 </hibernate-configuration>

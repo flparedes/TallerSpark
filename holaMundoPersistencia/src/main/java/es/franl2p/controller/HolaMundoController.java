@@ -6,11 +6,14 @@ import static spark.Spark.post;
 import java.util.HashMap;
 import java.util.Map;
 
-import es.franl2p.util.CarLoader;
+import es.franl2p.daos.CarDao;
+import es.franl2p.model.Car;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
 public class HolaMundoController {
+	
+	private CarDao carDao = new CarDao();
 	
 	public HolaMundoController() {
 		// Init the routes
@@ -38,7 +41,7 @@ public class HolaMundoController {
 		get("/form", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<String, Object>();
 
-	        attributes.put("coches", CarLoader.loadCars());
+	        attributes.put("coches", carDao.findAll());
 	
 	        return new ModelAndView(attributes, "formulario.ftl");
 	    }, new FreeMarkerEngine());
@@ -67,6 +70,33 @@ public class HolaMundoController {
 			attributes.put("coches", listaCoches);
 	
 	        return new ModelAndView(attributes, "resultado.ftl");
+	    }, new FreeMarkerEngine());
+		
+		/**
+		 * Ruta del formulario para crear/editar coches
+		 */
+		get("/car", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<String, Object>();
+
+	        return new ModelAndView(attributes, "car.ftl");
+	    }, new FreeMarkerEngine());
+		
+		/**
+		 * Ruta del POST para el formulario de pruebas
+		 */
+		post("/car", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<String, Object>();
+			
+			// Se recuperan los parametros
+			String nombre = req.queryParams("nombre");
+			
+			carDao.createCar(new Car(null, nombre));
+			
+			// Se cargan en el modelo
+			attributes.put("result", "Coche creado.");
+			attributes.put("nombre", nombre);
+	
+	        return new ModelAndView(attributes, "car.ftl");
 	    }, new FreeMarkerEngine());
 	}
 }
