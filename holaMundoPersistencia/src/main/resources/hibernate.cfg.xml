@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
- 
+
 <hibernate-configuration>
-    <session-factory>
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
-        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
-        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="connection.url">jdbc:hsqldb:mydb.db</property>
-        <property name="connection.username">SA</property>
-        <property name="connection.password"></property>
-         
-        <property name="hibernate.hbm2ddl.auto">update</property>
-         
-        <mapping class="es.franl2p.model.Car"/>
-    </session-factory>
+	<session-factory>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+		<property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<!-- <property name="connection.url">jdbc:hsqldb:mem:mydb</property> -->
+		<property name="connection.url">jdbc:hsqldb:mydb.db</property>
+		<property name="connection.username">SA</property>
+		<property name="connection.password"></property>
+
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- <property name="hibernate.hbm2ddl.auto">create</property> -->
+		<property name="hibernate.hbm2ddl.import_files">/sql/manufacturers.sql,/sql/cars.sql</property>
+
+		<mapping class="es.franl2p.model.Manufacturer" />
+		<mapping class="es.franl2p.model.Car" />
+	</session-factory>
 </hibernate-configuration>

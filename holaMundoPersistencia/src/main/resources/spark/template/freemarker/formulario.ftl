@@ -12,7 +12,7 @@
     <#if coches??>
     <h2>Coches</h2>
 	<#list coches as coche>
-	    <input type='checkbox' name='coches' value='${coche["id"]}'/> ${coche.nombre}<br />
+	    <input type='checkbox' name='coches' value='${coche["id"]}'/> ${coche.name}<br />
 	</#list>
 	</#if>
 
