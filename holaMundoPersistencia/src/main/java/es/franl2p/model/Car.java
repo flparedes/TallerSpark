@@ -21,7 +21,8 @@ public class Car {
 	
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+//	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "ID_MANUFACTURER")
 	private Manufacturer manufacturer;
 
@@ -29,13 +30,7 @@ public class Car {
 		// No-arg constructor
 	}
 
-	public Car(Integer id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
 	public Car(Integer id, String name, Manufacturer manufacturer) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.manufacturer = manufacturer;

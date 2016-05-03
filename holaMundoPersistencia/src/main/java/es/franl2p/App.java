@@ -1,5 +1,6 @@
 package es.franl2p;
 
+import es.franl2p.controller.CarsController;
 import es.franl2p.controller.HolaMundoController;
 
 /**
@@ -11,5 +12,6 @@ public class App {
 		
 		// Creates the controllers
 		new HolaMundoController();
+		new CarsController();
 	}
 }
