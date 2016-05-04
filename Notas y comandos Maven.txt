@@ -1,8 +1,14 @@
 
  ==========================
+ = Comandos Maven básicos =
  ==========================
  
+A continuación se listan los comandos básicos para gestionar los proyectos Maven del taller, así como cualquier otro proyecto Maven.
 
+Crear una aplicación simple:
+	- Parámetros:
+		1.- grupo: Nombre del grupo Maven que contendrá esta aplicacion. Normalmente se utiliza el nombre de la organización, por ejemplo: org.apache
+		2.- nombre: Nombre de la aplicación o artefacto que se está generando.
 		
 	- Comando:
 		mvn archetype:generate -DgroupId=<grupo> -DartifactId=<nombre> -DarchetypeArtifactId=maven-archetype-quickstart
@@ -13,6 +19,7 @@ Compilar un proyecto Maven:
 		mvn compile
 		
 	- Resultado:
+		Compila el código fuente del proyecto. Las clases compiladas se ubican en la carpeta target.
 
 ==============
 Empaquetar un proyecto Maven:
@@ -20,6 +27,7 @@ Empaquetar un proyecto Maven:
 		mvn package
 		
 	- Resultado:
+		Compila el código fuente del proyecto y lo empaqueta en el tipo definido en el fichero pom.xml (jar, war, ear, etc.). Las clases compiladas y el proyecto empaquetado se ubican en la carpeta target.
 
 ==============
 Limpiar un proyecto Maven:
@@ -36,6 +44,8 @@ Concatenar comandos:
 		mvn clean compile package
 
 ==============
+Ejecución offline:
+	Cada vez que se ejecuta un comando Maven comprueba la versión de las dependencias y de los plugins en los repositorios configurados. Para agilizar la ejecución o impedir que se descarguen algunas dependencias se pueden ejecutar los comnandos offline, para ello se incluye -o al comando ejecutado.
 	Por ejemplo para limpiar, compilar y empaquetar un proyecto offline podemos usar el comando:
 		mvn clean compile package -o
 		
@@ -43,20 +53,42 @@ Concatenar comandos:
  = Plugins de Maven =
  ====================
  
+A continuación se listan los plugins Maven utilizados en los proyectos del taller, indicando su funcionalidad, parámetros de configuración, ejecución y demás información util sobre los mismos.
 
 maven-compiler-plugin
 
+	- Utilidad: Este plugin sirve para configurar los parámetros de compilación del proyecto.
+	- Configuración: Mediante los siguientes parámetros configuramos la versión de Java.
+		1.- source: Indica la versión de Java que se utiliza para el código fuente.
+		2.- target: Indica la versión de Java que se utilizará para compilar el código fuente.
 
 ==============
 exec-maven-plugin
 
+	- Utilidad: Se utiliza para arrancar la aplicación mediante el comando Maven: mvn exec:java
+	- Configuración: Permite configurar la clase principal del proyecto (ejecutada en el arranque) y los argumentos de ejecución.
 		- mainClass: Nombre completo de la clase a ejecutar (paquete.clase). Por ejemplo: es.franl2p.App
+		- arguments: Lista de argumentos pasados en el arranque. Estos argumentos se deben recuperar y tratar en el método main.
+	- Ejecución: Para ejecutar el plugin y arrancar la aplicación se usa el comando: mvn exec:java
 
 ==============
 maven-assembly-plugin
 
+	- Utilidad: Plugin para empaquetar el proyecto. Lo utilizamos para generar una única biblioteca jar ejecutable con todas las dependencias, módulos, etc. del proyecto.
+	- Configuración: En este plugin hay que configurar la fase de ejecución del mismo, la clase principal a ejecutar, etc.
+		- phase: Indica la fase en la que se ejecutará el plugin. Por ejemplo: package
+		- goal: Con single especificamos que queremos que el proceso de ensamblado se ejecute en la construcción del proyecto.
+		- descriptorRef: Este parámetro sirve para utilizar alguno de los descriptores de ensamblado prefabricados. En nuestro caso usaremos jar-with-dependencies.
+		- mainClass: Este parámetro se utiliza para indicar en el Manifest del jar cual es la clase principal a ejecutar.
+	- Ejecución: Para ejecutar el plugin y arrancar la aplicación se usa el comando: mvn package
+	- Lanzar aplicación: Como hemos dicho este jar generado tiene todas las dependencias necesarias para ejecutarlo. Para ello usaremos el comando: java -jar ./target/aplicacion-jar-with-dependencies.jar
 
 ==============
 heroku-maven-plugin
 
+	- Utilidad: Este plugin se utiliza para compilar, empaquetar, desplegar y arrancar la aplicación en Heroku.
+	- Configuración: Para usarlo necesitamos configurar los siguientes parámetros:
+		- jdkVersion: Indica la versión del JDK necesario para ejecutar el proyecto.
 		- appName: Nombre de la aplicacion en Heroku.
+		- web: Comando que debe ejecutar Heroku para arrancar la aplicación. Este comando será el siguiente: java -jar ./target/${artifactId}-${version}-jar-with-dependencies.jar.
+	- Ejecución: Para ejecutar el plugin y así poder desplegar y arrancar la aplicación en Horeki usamos el comando: mvn heroku:deploy
