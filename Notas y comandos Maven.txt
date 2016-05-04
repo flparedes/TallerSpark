@@ -1,0 +1,62 @@
+
+ ==========================
+ ==========================
+ 
+
+		
+	- Comando:
+		mvn archetype:generate -DgroupId=<grupo> -DartifactId=<nombre> -DarchetypeArtifactId=maven-archetype-quickstart
+
+==============
+Compilar un proyecto Maven:
+	- Comando:
+		mvn compile
+		
+	- Resultado:
+
+==============
+Empaquetar un proyecto Maven:
+	- Comando:
+		mvn package
+		
+	- Resultado:
+
+==============
+Limpiar un proyecto Maven:
+	- Comando:
+		mvn clean
+		
+	- Resultado:
+		Borra la carpeta target del proyecto.
+
+==============
+Concatenar comandos:
+	Maven permite ejecutar varios comandos seguidos. Para ello basta con escribirlos por orden y separados por espacios en blanco.
+	Por ejemplo para limpiar, compilar y empaquetar un proyecto podemos usar el comando:
+		mvn clean compile package
+
+==============
+	Por ejemplo para limpiar, compilar y empaquetar un proyecto offline podemos usar el comando:
+		mvn clean compile package -o
+		
+ ====================
+ = Plugins de Maven =
+ ====================
+ 
+
+maven-compiler-plugin
+
+
+==============
+exec-maven-plugin
+
+		- mainClass: Nombre completo de la clase a ejecutar (paquete.clase). Por ejemplo: es.franl2p.App
+
+==============
+maven-assembly-plugin
+
+
+==============
+heroku-maven-plugin
+
+		- appName: Nombre de la aplicacion en Heroku.
