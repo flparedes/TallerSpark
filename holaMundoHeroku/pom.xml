@@ -115,6 +115,7 @@
 				<configuration>
 					<jdkVersion>${java.version}</jdkVersion>
 					<!-- Nombre de la aplicación en Heroku -->
+					<appName>tallerSpark</appName>
 					<processTypes>
 						<!-- Comando que debe ejecutar Heroku para lanzar la aplicación -->
 						<web>java -jar ./target/${artifactId}-${version}-jar-with-dependencies.jar</web>
