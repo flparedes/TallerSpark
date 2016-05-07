@@ -1,7 +1,6 @@
 package es.franl2p.controller;
 
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 import java.util.HashMap;
 import java.util.Map;

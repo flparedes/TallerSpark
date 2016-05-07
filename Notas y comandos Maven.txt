@@ -70,6 +70,7 @@ exec-maven-plugin
 		- mainClass: Nombre completo de la clase a ejecutar (paquete.clase). Por ejemplo: es.franl2p.App
 		- arguments: Lista de argumentos pasados en el arranque. Estos argumentos se deben recuperar y tratar en el método main.
 	- Ejecución: Para ejecutar el plugin y arrancar la aplicación se usa el comando: mvn exec:java
+		Si no se ha compilado previamente el proyecto se recomienda usa el comando: mvn compile exec:java
 
 ==============
 maven-assembly-plugin
