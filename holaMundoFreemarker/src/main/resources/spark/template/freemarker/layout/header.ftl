@@ -1,4 +1,7 @@
-Cabecera<br/>
-<#if username??>
-    Bienvenido ${username} <a href="/logout">Salir</a> | <a href="/newpost">Nuevo Mensaje</a>
-</#if>
+<header class="head" id="h1">
+  <div>
+  	<span>
+      <h1>${textoCabecera}</h1>
+    </span>
+  </div>
+</header>
