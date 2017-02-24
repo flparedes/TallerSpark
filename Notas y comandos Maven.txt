@@ -73,6 +73,17 @@ exec-maven-plugin
 		Si no se ha compilado previamente el proyecto se recomienda usa el comando: mvn compile exec:java
 
 ==============
+Arrancar en local indicando la codificación:
+	Si se desea arrancar con una codificación en concreto, por ejemplo UTF-8, hay que usar el siguiente comando: 
+		mvn exec:java -Dfile.encoding=UTF-8
+
+==============
+Depurar en local:
+	Para arranzar maven en modo debug, de manera que podamos conectarnos con Eclipse (o el IDE que queramos) para depurar se usa el comando:
+		mvnDebug compile exec:java -Dfile.encoding=UTF-8
+	Con esto la aplicación se quedará esperando a que nuestro IDE se conecte por el puerto 8000 antes de continuar con el arranque.
+
+==============
 maven-assembly-plugin
 
 	- Utilidad: Plugin para empaquetar el proyecto. Lo utilizamos para generar una única biblioteca jar ejecutable con todas las dependencias, módulos, etc. del proyecto.
