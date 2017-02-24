@@ -13,7 +13,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<spark.version>2.3</spark.version>
+		<spark.version>2.5.5</spark.version>
+		<slf4j.version>1.7.21</slf4j.version>
 		<junit.version>4.12</junit.version>
 		<spark-freemarker.version>2.3</spark-freemarker.version>
 	</properties>
@@ -23,6 +24,11 @@
 			<groupId>com.sparkjava</groupId>
 			<artifactId>spark-core</artifactId>
 			<version>${spark.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 
 		<dependency>
@@ -58,8 +64,12 @@
 				<version>1.2.1</version>
 				<configuration>
 					<mainClass>es.franl2p.App</mainClass>
-					<arguments>
-					</arguments>
+			        <systemProperties>
+			            <systemProperty>
+			                <key>file.encoding</key>
+			                <value>UTF-8</value>
+			            </systemProperty>
+			        </systemProperties>
 				</configuration>
 			</plugin>
 		</plugins>
