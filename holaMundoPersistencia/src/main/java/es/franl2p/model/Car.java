@@ -1,5 +1,8 @@
 package es.franl2p.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "Cars")
-public class Car {
+public class Car extends Validable {
 
 	@Id
 	@GeneratedValue(generator = "increment")
@@ -58,5 +61,25 @@ public class Car {
 
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
+	}
+
+	@Override
+	protected boolean check() {
+		boolean result = true;
+		List<String> errores = new LinkedList<String>();
+		
+		if (name == null || "".equals(name)) {
+			result = false;
+			errores.add("El nombre es obligatorio");
+		}
+		
+		if (manufacturer == null) {
+			result = false;
+			errores.add("El fabricante es obligatorio");
+		}
+		
+		setErrors(errores);
+		
+		return result;
 	}
 }
