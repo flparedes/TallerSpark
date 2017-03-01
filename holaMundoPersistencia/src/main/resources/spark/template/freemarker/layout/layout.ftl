@@ -3,7 +3,7 @@
   	<meta charset="utf-8" />
 	<html>
 	<head>
-	    <title>Hola mundo</title>
+	    <title>Persistencia con Hibernate</title>
 	    <meta content="text/html; charset=utf-8" http-equiv="content-type">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <link rel="stylesheet" href="/stylesheets/style.css">

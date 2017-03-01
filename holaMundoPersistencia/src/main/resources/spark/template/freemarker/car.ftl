@@ -8,10 +8,10 @@
     
     <h2>Fabricante</h2>
     <select id = "fabricante" name = "fabricante">
-    <#list fabricantes as fabricante>
-        <option value="${fabricante.id}">${fabricante.name}</option>
-    </#list>
-</select>
+	    <#list fabricantes as fabricante>
+	        <option value="${fabricante.id}">${fabricante.name}</option>
+	    </#list>
+	</select>
 
     <input type="submit" value="Guardar">
     <a href="/hola">Volver</a>
