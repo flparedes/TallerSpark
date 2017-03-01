@@ -29,7 +29,7 @@ public class ManufacturerDao extends BasicDao {
 	public Manufacturer findById(Integer id) {
 		Manufacturer manufacturer = null;
 		this.initTransaction();
-		manufacturer = session.load(Manufacturer.class, id);
+		manufacturer = session.get(Manufacturer.class, id);
 		this.endTransaction();
 		
 		return manufacturer;

@@ -16,8 +16,8 @@ public abstract class BasicDao {
 	protected Session session;
 
 	private static SessionFactory configureSessionFactory() throws HibernateException {  
-        Configuration configuration = new Configuration();  
-        configuration.configure();  
+//        Configuration configuration = new Configuration();  
+//        configuration.configure();  
          
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
         		.configure() // configures settings from hibernate.cfg.xml
