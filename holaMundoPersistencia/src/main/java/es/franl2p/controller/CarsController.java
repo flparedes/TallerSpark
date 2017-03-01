@@ -20,6 +20,18 @@ public class CarsController {
 	public CarsController() {
 		// Init the routes
 		/**
+		 * Application root route
+		 */
+		get("/", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<String, Object>();
+
+	        attributes.put("textoCabecera", "Lista de coches");
+	        attributes.put("coches", carDao.findAll());
+	
+	        return new ModelAndView(attributes, "list.ftl");
+	    }, new FreeMarkerEngine());
+		 
+		/**
 		 * Ruta del formulario de pruebas
 		 */
 		get("/form", (req, res) -> {
@@ -88,5 +100,12 @@ public class CarsController {
 	
 	        return new ModelAndView(attributes, "car.ftl");
 	    }, new FreeMarkerEngine());
+		
+		/**
+		 * Filtro que añade 
+		 */
+		after((request, response) -> {
+	        response.header("foo", "set by after filter");
+	    });
 	}
 }
