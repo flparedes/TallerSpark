@@ -114,14 +114,14 @@ public class CarsController {
 			logger.info("manufacturer: " + manufacturer);
 			Car coche = new Car(null, nombre, manufacturer);
 			
-			if (manufacturer.validate()) {
+			if (coche.validate()) {
 		        attributes.put("textoCabecera", "Coche creado");
 		        attributes.put("result", "Coche creado correctamente.");
 				carDao.createCar(coche);
 			} else {
 		        attributes.put("textoCabecera", "Nuevo coche");
 		        attributes.put("errores", manufacturer.getErrors());
-		        result = "formularioManufacturer.ftl";
+		        result = "formularioCar.ftl";
 			}
 
 			logger.info("result: " + result);
