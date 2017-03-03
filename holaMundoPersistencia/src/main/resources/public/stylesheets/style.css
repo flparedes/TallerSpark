@@ -74,6 +74,8 @@ header > div > span {
   height:100%;
   overflow:auto;
   padding:10px;
+  padding-bottom:20px;
+  margin-bottom: 2em;
 }
 
 /* Navigation menu styles */
@@ -257,7 +259,8 @@ p.empty {
 }
 
 .label,
-.data {
+.data,
+.buttons {
     margin-bottom: 1em;
 }
 
@@ -269,6 +272,15 @@ p.empty {
 }
 
 .data {
-    display: block;
-    margin-left: 22%;
+    /* display: block; */
+    float: left;
+    margin-left: 2%;
+    width: 60%;
+}
+
+.buttons {
+    /* display: block; */
+    float: left;
+    margin-left: 2%;
+    width: 16%;
 }

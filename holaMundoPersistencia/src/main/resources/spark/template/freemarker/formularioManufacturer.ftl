@@ -23,7 +23,7 @@
     	<input type="text" name="pais" size="120" value="${pais!""}">
     </div>
 
-    <input type="submit" value="Guardar">
+	<div class="label"><input type="submit" value="Guardar"></div>
 </form>
 
 </@layout.myLayout>

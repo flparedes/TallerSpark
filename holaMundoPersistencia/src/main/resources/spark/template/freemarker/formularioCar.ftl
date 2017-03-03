@@ -32,7 +32,7 @@
     	<input type="text" name="nombre" size="120" value="${nombre!""}">
     </div>
 
-    <input type="submit" value="Guardar">
+    <div class="label"><input type="submit" value="Guardar"></div>
 </form>
 
 </@layout.myLayout>

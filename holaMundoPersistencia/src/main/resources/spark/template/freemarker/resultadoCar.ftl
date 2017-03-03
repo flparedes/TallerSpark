@@ -9,6 +9,6 @@
     <div class="label">Fabricante</div>
     <div class="data">${fabricante.name}</div>
 
-    <a href="/">Volver</a>
+    <div class="label"><a href="/">Volver</a></div>
 
 </@layout.myLayout>

@@ -9,6 +9,6 @@
     <div class="label">País</div>
     <div class="data">${pais}</div>
 
-    <a href="/">Volver</a>
+    <div class="label"><a href="/">Volver</a></div>
 
 </@layout.myLayout>

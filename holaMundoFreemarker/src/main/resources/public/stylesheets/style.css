@@ -74,6 +74,8 @@ header > div > span {
   height:100%;
   overflow:auto;
   padding:10px;
+  padding-bottom:20px;
+  margin-bottom: 2em;
 }
 
 /* Navigation menu styles */
