@@ -4,7 +4,11 @@ import java.util.List;
 
 import es.franl2p.model.Car;
 
-public class CarDao extends BasicDao {
+public class CarDao extends BasicDao<Car> {
+
+	public CarDao() {
+		this.configureEntityName();
+	}
 	
 	/**
 	 * Creates the given car
@@ -31,5 +35,10 @@ public class CarDao extends BasicDao {
 		this.endTransaction();
 		
 		return cars;
+	}
+
+	@Override
+	protected void configureEntityName() {
+		this.entityName = Car.class.getName();
 	}
 }

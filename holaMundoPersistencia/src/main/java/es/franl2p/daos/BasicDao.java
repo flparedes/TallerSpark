@@ -6,14 +6,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 
-public abstract class BasicDao {
+public abstract class BasicDao<T> {
 	
 	// Hibernate factories
 	private static final SessionFactory sessionFactory = configureSessionFactory();
 	
 	protected Session session;
+	protected String entityName;
 
 	private static SessionFactory configureSessionFactory() throws HibernateException {  
 //        Configuration configuration = new Configuration();  
@@ -42,5 +42,45 @@ public abstract class BasicDao {
 	protected void endTransaction() {
 		session.getTransaction().commit();
         session.close();
-	}	        
+	}
+	
+	/**
+	 * Gets the entity by it's ID.
+	 * @param id Entity ID.
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public T findById(Integer id) {
+		T entity = null;
+		this.initTransaction();
+		entity = (T) session.get(entityName, id);
+		this.endTransaction();
+		
+		return entity;
+	}
+	
+	/**
+	 * Deletes a car with the given id
+	 * @param id Car identifier.
+	 * @return true if deleted or false if not.
+	 */
+	public boolean delete(Integer id) {
+		boolean exito = false;
+		
+		T entity = findById(id);
+		
+		if (entity != null) {
+			this.initTransaction();
+			session.delete(entity);
+			this.endTransaction();
+			exito = true;
+		}
+		
+		return exito;
+	}
+	
+	/**
+	 * Sets the entityName.
+	 */
+	protected abstract void configureEntityName();
 }

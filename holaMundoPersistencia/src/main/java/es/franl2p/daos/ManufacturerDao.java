@@ -4,7 +4,11 @@ import java.util.List;
 
 import es.franl2p.model.Manufacturer;
 
-public class ManufacturerDao extends BasicDao {
+public class ManufacturerDao extends BasicDao<Manufacturer> {
+	
+	public ManufacturerDao() {
+		this.configureEntityName();
+	}
 	
 	/**
 	 * Creates the given Manufacturer
@@ -22,20 +26,6 @@ public class ManufacturerDao extends BasicDao {
 	}
 	
 	/**
-	 * Gets the manufacturer by it's ID.
-	 * @param id Manufacturer ID.
-	 * @return
-	 */
-	public Manufacturer findById(Integer id) {
-		Manufacturer manufacturer = null;
-		this.initTransaction();
-		manufacturer = session.get(Manufacturer.class, id);
-		this.endTransaction();
-		
-		return manufacturer;
-	}
-	
-	/**
 	 * Gets all the Manufacturers.
 	 * @return 
 	 */
@@ -45,5 +35,10 @@ public class ManufacturerDao extends BasicDao {
 		this.endTransaction();
 		
 		return manufacturers;
+	}
+
+	@Override
+	protected void configureEntityName() {
+		this.entityName = Manufacturer.class.getName();
 	}
 }
