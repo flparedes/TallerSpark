@@ -14,7 +14,7 @@ import es.franl2p.services.DocumentService;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
 
-public class MainController {
+public class MainController extends BaseController {
 	private final static Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	private DocumentService documentService = new DocumentService(); 
@@ -31,6 +31,8 @@ public class MainController {
 	        // attributes.put("textoCabecera", "MyMega");
 			List <Document> docs = documentService.findAll();
 			attributes.put("documents", docs);
+			
+			attributes = this.addSessionAttributes(req, attributes);
 	
 	        return new ModelAndView(attributes, "main.ftl");
 	    }, new FreeMarkerEngine());

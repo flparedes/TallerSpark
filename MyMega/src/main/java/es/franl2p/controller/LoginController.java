@@ -13,7 +13,7 @@ import es.franl2p.services.LoginService;
 import es.franl2p.utils.Constants;
 import spark.template.freemarker.FreeMarkerEngine;
 
-public class LoginController {
+public class LoginController extends BaseController {
 	private final static Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	private LoginService loginService = new LoginService();
@@ -28,9 +28,8 @@ public class LoginController {
 			 * Show login page
 			 */
 			get("", (req, res) -> {
-				Map<String, Object> attributes = new HashMap<String, Object>();
-	
-		        attributes.put("textoCabecera", "MyMega");
+				Map<String, Object> attributes = this.addSessionAttributes(req, new HashMap<String, Object>());
+//		        attributes.put("textoCabecera", "MyMega");
 		
 		        return new ModelAndView(attributes, "login/login.ftl");
 		    }, new FreeMarkerEngine());
@@ -42,17 +41,17 @@ public class LoginController {
 				String view = "main.ftl";
 				Map<String, Object> attributes = new HashMap<String, Object>();
 	
-		        attributes.put("textoCabecera", "MyMega");
-		        
 		        String user = req.queryParams("user");
 				String pass = req.queryParams("pass");
 				
 				if (loginService.loginUser(user, pass, req.session())) {
 					// User logged in
 					String path = req.session().attribute(Constants.PATH_AFTER_LOGIN);
-					if (path != null && !path.isEmpty()) {
-						res.redirect(path);
+					if (path == null || path.isEmpty()) {
+						path = "/";
 					}
+
+					res.redirect(path);
 				} else {
 					attributes.put("user", user);
 					attributes.put("error", "No se ha podido auntenticar el usuario. Compruebe que los datos introducidos son correctos.");
@@ -67,14 +66,10 @@ public class LoginController {
 		 * Rutas para manufacturer
 		 */
 		path("/logout", () -> {
-			/**
-			 * Application root route
-			 */
-			get("/", (req, res) -> {
-				Map<String, Object> attributes = new HashMap<String, Object>();
+			get("", (req, res) -> {
+				loginService.logoutUser(req.session());
+				Map<String, Object> attributes = this.addSessionAttributes(req, new HashMap<String, Object>());
 	
-		        attributes.put("textoCabecera", "MyMega");
-		
 		        return new ModelAndView(attributes, "main.ftl");
 		    }, new FreeMarkerEngine());
 		});
