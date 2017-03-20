@@ -46,28 +46,34 @@ h2 {
 
 /* Header styles */
 header {
-	background: white;
-	text-align: center;
+	background: #DD0000;
 	font-family: Baloo, cursive;
-	font-size: 2.2rem;
-	background-image: url("../images/Cabecera.png");
-    background-repeat: no-repeat;
-    background-position: center;
-	min-height: 200px;
+	font-size: 2rem;
+	color: #fffafa;
+	min-height: 100px;
 	min-width: 1100px;
 }
 
-header > div {
-	height: 200px;
-  	line-height: 200px;
+header>.text {
+    float: left;
+    width: 70%;
+  	line-height: 5rem;
 }
 
-header > div > span {
-	color: #ffffff;
-	display: inline-block;
-	vertical-align: middle;
-  	line-height: 5rem;
-	padding: 0px 50px;
+header>.login {
+    /* display: block; */
+    float: right;
+	padding: 10px 15px;
+	font-size: 1.5rem;
+	text-align: right;
+}
+
+header .login a:visited, a:link {
+    color: #CCCCCC;
+}
+
+header .login a:hover {
+    color: #fffafa;
 }
  
 #content {
@@ -90,7 +96,7 @@ nav {
 	font-weight: bold;
 }
 
-nav span {
+nav > span {
 	margin: 0px 50px 0px 0px;
 	padding: 8px 25px;
 	background: #EEE;
@@ -283,4 +289,20 @@ p.empty {
     float: left;
     margin-left: 2%;
     width: 16%;
+}
+
+input[type=submit] {
+	padding:5px 15px;
+	background:#EEE;
+	border:0 none;
+    cursor:pointer;
+    
+	border: 2px solid #5f5f5f;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input[type=submit]:hover {
+	border: 2px solid #373737;
+	background: #DDD;
 }
