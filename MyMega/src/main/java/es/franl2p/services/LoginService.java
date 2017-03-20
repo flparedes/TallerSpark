@@ -76,4 +76,12 @@ public class LoginService {
     	
     	return authenticated;
     }
+    
+    /**
+     * Logs out the user and removes the users name from the session.
+     * @param session The session where the user name is stored.
+     */
+    public void logoutUser(Session session) {
+    	session.removeAttribute(Constants.USER_SESSION);
+    }
 }
