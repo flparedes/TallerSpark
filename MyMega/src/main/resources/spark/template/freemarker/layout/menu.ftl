@@ -3,9 +3,6 @@
 		<a href="/">Inicio</a>
 	</span>
 	<span>
-		<a href="/car/new">Nuevo coche</a>
-	</span>
-	<span>
-		<a href="/manufacturer/new">Nuevo fabricante</a>
+		<a href="/new">Nuevo</a>
 	</span>
 </nav>

@@ -69,11 +69,11 @@ header>.login {
 }
 
 header .login a:visited, a:link {
-    color: #CCCCCC;
+    color: #fffafa;
 }
 
 header .login a:hover {
-    color: #fffafa;
+    color: #CCCCCC;
 }
  
 #content {
@@ -89,19 +89,19 @@ nav {
 	/* text-align: left; 
 	float: left;
 	width: 15%; */
-	text-align: center;
+	text-align: left;
 	vertical-align: middle;
 	font-family: Baloo, cursive;
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	font-weight: bold;
 }
 
 nav > span {
 	margin: 0px 50px 0px 0px;
-	padding: 8px 25px;
+	padding: 4px 15px;
 	background: #EEE;
 	
-	border: 2px solid #5f5f5f;
+	border: 1px solid #5f5f5f;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -110,7 +110,7 @@ nav > span {
 }
 
 nav span:hover {
-	border: 2px solid #373737;
+	border: 1px solid #373737;
 	background: #DDD;
 }
 
@@ -251,12 +251,8 @@ section > ul > li {
     background-position: center;
 }
 
-p.empty {
+p.empty, .linea {
     clear: both;
-}
-
-.linea {
-	width: 100%;
 }
 
 .error {
@@ -296,13 +292,14 @@ input[type=submit] {
 	background:#EEE;
 	border:0 none;
     cursor:pointer;
+	font-weight: bold;
     
-	border: 2px solid #5f5f5f;
+	border: 1px solid #5f5f5f;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
 input[type=submit]:hover {
-	border: 2px solid #373737;
+	border: 1px solid #373737;
 	background: #DDD;
 }
