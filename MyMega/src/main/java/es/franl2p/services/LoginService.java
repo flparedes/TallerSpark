@@ -26,7 +26,24 @@ public class LoginService {
         return isLoggedIn;
     }
     
-    public String getLoggedInUser(Session session) {
+    /**
+     * Gets the logged in user name.
+     * @param session Session where the user name is stored.
+     * @return The logged in user name or if there are no user logged.
+     */
+    public User getLoggedInUser(Session session) {
+    	String userName = this.getLoggedInUserName(session);
+    	User user = userDao.findByName(userName);
+    	
+    	return user;
+    }
+    
+    /**
+     * Gets the logged in user name.
+     * @param session Session where the user name is stored.
+     * @return The logged in user name or if there are no user logged.
+     */
+    public String getLoggedInUserName(Session session) {
     	String userName = session.attribute(Constants.USER_SESSION);
     	
     	return userName;
@@ -42,7 +59,7 @@ public class LoginService {
     public void checkLoggedIn(Request request, Response response) {
         if (!this.isLoggedIn(request, response)) {
             request.session().attribute(Constants.PATH_AFTER_LOGIN, request.pathInfo());
-            response.redirect("/login");
+            response.redirect(Constants.LOGIN_ROUTE);
         }
     }
     

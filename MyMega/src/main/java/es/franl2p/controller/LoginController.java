@@ -23,7 +23,7 @@ public class LoginController extends BaseController {
 		/**
 		 * Rutas para manufacturer
 		 */
-		path("/login", () -> {
+		path(Constants.LOGIN_ROUTE, () -> {
 			/**
 			 * Show login page
 			 */
@@ -48,7 +48,7 @@ public class LoginController extends BaseController {
 					// User logged in
 					String path = req.session().attribute(Constants.PATH_AFTER_LOGIN);
 					if (path == null || path.isEmpty()) {
-						path = "/";
+						path = Constants.MAIN_ROUTE;
 					}
 
 					res.redirect(path);
@@ -65,13 +65,12 @@ public class LoginController extends BaseController {
 		/**
 		 * Rutas para manufacturer
 		 */
-		path("/logout", () -> {
+		path(Constants.LOGOUT_ROUTE, () -> {
 			get("", (req, res) -> {
 				loginService.logoutUser(req.session());
-				Map<String, Object> attributes = this.addSessionAttributes(req, new HashMap<String, Object>());
-	
-		        return new ModelAndView(attributes, "main.ftl");
-		    }, new FreeMarkerEngine());
+				res.redirect(Constants.MAIN_ROUTE);
+			    return null;
+		    });
 		});
 	}
 }
