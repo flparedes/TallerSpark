@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,6 +24,8 @@ public class Document extends Validable {
 	private Integer id;
 	
 	private String name;
+	
+	@Lob
 	private byte[] data;
 
 //	@ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -34,9 +37,10 @@ public class Document extends Validable {
 		// No-arg constructor
 	}
 
-	public Document(Integer id, String name, User user) {
+	public Document(Integer id, String name, byte[] data, User user) {
 		this.id = id;
 		this.name = name;
+		this.data = data;
 		this.user = user;
 	}
 
@@ -80,6 +84,11 @@ public class Document extends Validable {
 		if (name == null || "".equals(name)) {
 			result = false;
 			errors.add("Name must be set");
+		}
+		
+		if (data == null || data.length <= 0) {
+			result = false;
+			errors.add("The document must have some data");
 		}
 		
 		if (user == null) {
