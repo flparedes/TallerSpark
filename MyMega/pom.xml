@@ -19,6 +19,7 @@
 		<hsqldb.version>2.2.8</hsqldb.version>
 		<postgre.version>9.4.1208</postgre.version>
 		<jBCrypt.version>0.4</jBCrypt.version>
+		<heroku-maven-plugin.version>1.1.3</heroku-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -100,6 +101,46 @@
 					</systemProperties>
 					<arguments>
 					</arguments>
+				</configuration>
+			</plugin>
+
+			<!-- Plugin para empaquetar todo el proyecto en un jar ejecutable -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<!-- Aquí se le indica a Maven que incluya todas las depencias en el Jar -->
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>es.franl2p.MyMega</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
+			<!-- Plugin para desplegar y arrancar la aplicación en Heroku -->
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>${heroku-maven-plugin.version}</version>
+				<configuration>
+					<jdkVersion>${java.version}</jdkVersion>
+					<!-- Nombre de la aplicación en Heroku -->
+					<appName>my-mega</appName>
+					<processTypes>
+						<!-- Comando que debe ejecutar Heroku para lanzar la aplicación -->
+						<web>java -jar ./target/${artifactId}-${version}-jar-with-dependencies.jar</web>
+					</processTypes>
 				</configuration>
 			</plugin>
 		</plugins>

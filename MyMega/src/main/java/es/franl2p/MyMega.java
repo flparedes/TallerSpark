@@ -16,8 +16,20 @@ public class MyMega {
 		staticFiles.location("/public");
 		staticFiles.expireTime(600L);
 		
+		// Configurar la App para Heroku
+		configureHerokuApp();
+		
 		// Creates the controllers
 		new MainController();
 		new LoginController();
 	}
+
+    static void configureHerokuApp() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        
+        // If there's a PORT assigned by Heroku we set it.
+        if (processBuilder.environment().get("PORT") != null) {
+            port(Integer.parseInt(processBuilder.environment().get("PORT")));
+        }
+    }
 }
