@@ -50,20 +50,6 @@ public class LoginService {
     }
     
     /**
-     * Checks if the user is logged in or not. If it's not logged then redirects to the login page.
-     * The origin of the request (request.pathInfo()) is saved in the session to the user can be 
-     * redirected back after login.
-     * @param request Spark request
-     * @param response Spark response
-     */
-    public void checkLoggedIn(Request request, Response response) {
-        if (!this.isLoggedIn(request, response)) {
-            request.session().attribute(Constants.PATH_AFTER_LOGIN, request.pathInfo());
-            response.redirect(Constants.LOGIN_ROUTE);
-        }
-    }
-    
-    /**
      * Logs in the user and save the users name in session. If the user name and password
      * doesn't match the user isn't logged in and returns false.
      * @param userName The user's name

@@ -24,7 +24,14 @@ public abstract class BaseController {
 			
 		    if (Constants.PROTECTED_ROUTES.contains(route)) {
 		    	logger.info("Try to access to the protected route: " + route);
-		    	loginService.checkLoggedIn(request, response);
+		    	if (!loginService.isLoggedIn(request, response)) {
+		        	// Store the requested path and redirect to login.
+		            request.session().attribute(Constants.PATH_AFTER_LOGIN, request.pathInfo());
+		            response.redirect(Constants.LOGIN_ROUTE);
+		            
+		            // Halt the request
+		        	halt();
+		        }
 		    }
 		});
 	}
