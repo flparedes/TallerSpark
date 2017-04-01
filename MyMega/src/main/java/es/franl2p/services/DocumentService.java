@@ -29,6 +29,17 @@ public class DocumentService {
     	
     	return docs;
     }
+	
+	/**
+	 * 
+	 * @return
+	 */
+    public Document findById(Integer id) {
+    	Document doc = documentDao.findById(id);
+    	logger.info("Document found: " + doc);
+    	
+    	return doc;
+    }
     
     /**
      * Inserta el nuevo documento en la Base de Datos.

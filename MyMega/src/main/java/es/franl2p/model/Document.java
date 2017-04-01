@@ -24,6 +24,7 @@ public class Document extends Validable {
 	private Integer id;
 	
 	private String name;
+	private String type;
 	
 	@Lob
 	private byte[] data;
@@ -37,9 +38,10 @@ public class Document extends Validable {
 		// No-arg constructor
 	}
 
-	public Document(Integer id, String name, byte[] data, User user) {
+	public Document(Integer id, String name, String type, byte[] data, User user) {
 		this.id = id;
 		this.name = name;
+		this.type = type;
 		this.data = data;
 		this.user = user;
 	}
@@ -58,6 +60,14 @@ public class Document extends Validable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public byte[] getData() {
@@ -84,6 +94,11 @@ public class Document extends Validable {
 		if (name == null || "".equals(name)) {
 			result = false;
 			errors.add("Name must be set");
+		}
+		
+		if (type == null || "".equals(type)) {
+			result = false;
+			errors.add("Document type must be set");
 		}
 		
 		if (data == null || data.length <= 0) {
