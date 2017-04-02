@@ -6,12 +6,24 @@
 	<session-factory>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
+		<!-- Local HSQL Database config -->
 		<property name="dialect">org.hibernate.dialect.HSQLDialect</property>
 		<property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
 		<property name="connection.url">jdbc:hsqldb:mem:mydb</property>
-		<!-- <property name="connection.url">jdbc:hsqldb:mydb.db</property> -->
 		<property name="connection.username">SA</property>
 		<property name="connection.password"></property>
+		
+		<!-- PostGres Databse config -->
+		<!-- <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="driverClassName">org.postgresql.Driver</property>
+	    <property name="url">#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }</property>
+	    <property name="username">#{ @dbUrl.getUserInfo().split(':')[0] }</property>
+	    <property name="password">#{ @dbUrl.getUserInfo().split(':')[1] }</property>
+	    <property name="maxActive">10</property>
+	    <property name="maxIdle">5</property>
+	    <property name="minIdle">2</property>
+	    <property name="initialSize">5</property>
+	    <property name="removeAbandoned">true</property> -->
 
 		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
 		<property name="hibernate.hbm2ddl.auto">create</property>

@@ -6,6 +6,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.AvailableSettings;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 public abstract class BasicDao<T> {
 	
@@ -15,15 +18,56 @@ public abstract class BasicDao<T> {
 	protected Session session;
 	protected String entityName;
 
-	private static SessionFactory configureSessionFactory() throws HibernateException {  
-//        Configuration configuration = new Configuration();  
-//        configuration.configure();  
-         
-        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+	private static SessionFactory configureSessionFactory() throws HibernateException {		
+		// Check if there are environment config vars
+		ProcessBuilder processBuilder = new ProcessBuilder();
+        
+        // Heroku got the DataBase parameters set as environments variables.
+        if (processBuilder.environment().get("DATABASE_URL") != null) {
+            return configureHeroku(processBuilder);
+        } else {
+        	return configureLocal();
+        }
+    }
+	
+	/**
+	 * Configure the DataBase connection with the local settings in the hibernate.cfg.xml config file
+	 * @return SessionFactory configured to run locally.
+	 */
+	private static SessionFactory configureLocal() {
+		StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
         		.configure() // configures settings from hibernate.cfg.xml
     			.build();          
         return new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
-    }
+	}
+	
+	/**
+	 * Configure the DataBase connection with the settings in the hibernate.cfg.xml config file and
+	 * overrided with the Heroku environment parameters.
+	 * @return SessionFactory configured with Heroku parameters.
+	 */
+	private static SessionFactory configureHeroku(ProcessBuilder processBuilder) {
+		Configuration configuration = new Configuration();
+		
+		String dbUrl = processBuilder.environment().get("JDBC_DATABASE_URL");
+		String user = processBuilder.environment().get("JDBC_DATABASE_USERNAME");
+		String pass = processBuilder.environment().get("JDBC_DATABASE_PASSWORD");
+
+		configuration.setProperty(AvailableSettings.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
+		configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		configuration.setProperty("dialect", "org.hibernate.dialect.PostgreSQLDialect");
+		configuration.setProperty("hibernate.connection.url", dbUrl);
+		configuration.setProperty("hibernate.connection.username", user);
+		configuration.setProperty("hibernate.connection.password", pass);
+		configuration.setProperty("hibernate.driverClassName", "org.postgresql.Driver");
+		configuration.configure();
+		
+		// configures settings from hibernate.cfg.xml and override settings
+		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure()    
+	            .applySettings(configuration.getProperties()).build();
+		
+	    return configuration.buildSessionFactory(serviceRegistry);
+	}
 
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;

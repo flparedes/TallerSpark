@@ -1,8 +1,7 @@
 package es.franl2p.controller;
 
 import static spark.Spark.*;
-import spark.Request;
-import spark.Response;
+import spark.*;
 
 import java.io.IOException;
 import java.io.InputStream;

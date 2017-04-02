@@ -56,15 +56,16 @@ public class DocumentService {
     /**
      * Inserta el nuevo documento en la Base de Datos.
      * @param fileName Nombre del documento a insertar.
+     * @param type Tipo mime del documento a insertar.
      * @param is InputStream con el contenido del fichero a insertar.
      * @param userName Nombre del usuario que realiza la subida.
      * @return Resultado de la inserción.
      * @throws IOException Excepción en caso de que falle la lectura del contenido.
      */
-    public boolean insert(String fileName, InputStream is, String userName) throws IOException {
+    public boolean insert(String fileName, String type, InputStream is, String userName) throws IOException {
     	byte[] data = inputStream2ByteArray(is);
     	User user = userDao.findByName(userName);
-    	return documentDao.create(new Document(null, fileName, data, user));
+    	return documentDao.create(new Document(null, fileName, type, data, user));
     }
     
     private byte[] inputStream2ByteArray(InputStream is) throws IOException {
