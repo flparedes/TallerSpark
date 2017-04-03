@@ -6,7 +6,15 @@
 		<#list documents as document>
 		<div class="linea">
 			<div class="label">${document.name}</div>
-			<div class="data"><a href="/download/${document.id}">Descargar</a></div>
+			<div class="data">
+				<a href="/download/${document.id}">Descargar</a>
+				<#if user?? && user == document.user.name>
+					<a href="#" 
+					  onclick="if (confirm('¿Seguro que quieres borrar el documento?')) { window.location='/delete/${document.id}';}">
+					    Borrar
+					</a>
+				</#if>
+			</div>
 		</div>
 		</#list>
 	</#if>

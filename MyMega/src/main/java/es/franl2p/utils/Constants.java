@@ -14,6 +14,7 @@ public class Constants {
 	public static final String ERROR_400 = "Petición incorrecta, contacte con el administrador.";
 	public static final String ERROR_404 = "Página no encontrada, contacte con el administrador.";
 	public static final String ERROR_UPLOADING = "Error subiendo el fichero.";
+	public static final String ERROR_DELETING = "Error borrando el fichero, asegurate de que el documento existe y que tienes permisos para borrarlo.";
 	
 	// Routes constants
 	public static final String MAIN_ROUTE = "/";
@@ -21,6 +22,7 @@ public class Constants {
 	public static final String LOGIN_ROUTE = "/login";
 	public static final String LOGOUT_ROUTE = "/logout";
 	public static final String NEW_DOC_ROUTE = "/new";
+	public static final String DELETE_DOC_ROUTE = "/delete";
 	public static final List<String> PROTECTED_ROUTES;
 	static {
         List<String> protectedRoutes = new LinkedList<String>();

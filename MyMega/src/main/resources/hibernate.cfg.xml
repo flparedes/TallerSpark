@@ -26,9 +26,9 @@
 	    <property name="removeAbandoned">true</property> -->
 
 		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 		<!-- Import files works only with create or create-drop -->
-		<property name="hibernate.hbm2ddl.import_files">/sql/users.sql,/sql/documents.sql</property>
+		<property name="hibernate.hbm2ddl.import_files">/sql/users.sql</property>
 
 		<mapping class="es.franl2p.model.User" />
 		<mapping class="es.franl2p.model.Document" />

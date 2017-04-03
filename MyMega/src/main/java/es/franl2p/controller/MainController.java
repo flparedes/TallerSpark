@@ -114,6 +114,28 @@ public class MainController extends BaseController {
 
 	        return new ModelAndView(attributes, view);
 		}, new FreeMarkerEngine());
+		
+		/**
+		 * Delete doc action
+		 */
+		get(Constants.DELETE_DOC_ROUTE + "/:docId", (req, res) -> {
+			Integer docId = Converters.convert2Number(req.params(":docId"));
+			logger.info("docId: " + docId);
+
+	    	User user = loginService.getLoggedInUser(req.session());
+			Document doc = documentService.findById(docId);
+			logger.info("doc: " + doc);
+			
+			if (documentService.delete(doc, user)) {
+				res.redirect(Constants.MAIN_ROUTE);
+			    return null;
+			} else {
+	        	Map<String, Object> attributes = new HashMap<String, Object>();
+				attributes = this.addSessionAttributes(req, attributes);
+	        	attributes.put("error", Constants.ERROR_DELETING);
+	        	return new ModelAndView(attributes, "error.ftl");
+			}
+	    }, new FreeMarkerEngine());
 	}
 	
 

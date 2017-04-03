@@ -150,6 +150,24 @@ public abstract class BasicDao<T> {
 	}
 	
 	/**
+	 * Deletes a car with the given id
+	 * @param id Car identifier.
+	 * @return true if deleted or false if not.
+	 */
+	public boolean delete(T entity) {
+		boolean result = false;
+		
+		if (entity != null) {
+			this.initTransaction();
+			session.delete(entity);
+			this.endTransaction();
+			result = true;
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * Sets the entityName.
 	 */
 	protected abstract void configureEntityName();
